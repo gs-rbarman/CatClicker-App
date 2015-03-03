@@ -44,28 +44,7 @@
 //     document.body.appendChild(elem);
 // };
 ////////////////////////////////////////////////////////////////////////////////////////////
-var data = [{
 
-	name: "pussy",
-	url: "images/cat1.jpg",
-	count: 0
-},{
-	name: "ruby",
-	url: "images/cat2.jpg",
-	count: 0
-},{
-	name: "minni",
-	url: "images/cat3.jpg",
-	count: 0
-},{
-	name: "cathie",
-	url: "images/cat4.jpg",
-	count: 0
-},{
-	name: "meuie",
-	url: "images/cat5.jpg",
-	count: 0
-}];
 
 for ( d in data ) {
 
@@ -74,15 +53,51 @@ for ( d in data ) {
 
 $('.cat_names li').on('click', function(){
 	var x = $(this).html();
-	var c, u;
+	var c, u, n;
 	for ( d in data) {
 		if ( data[d].name == x) {
 			c = data[d].count;
 			u = data[d].url;
+			n = data[d].name;
 		}
 	}
+
 	if (c == 0) $('.catPicAndCountContainer .catClick_count').html(""); 
 	else $('.catPicAndCountContainer .catClick_count').html(c);
 
+	$('.catPicAndCountContainer .cat_name').html(n);
+
 	$('.catPicAndCountContainer .cat_images').attr('src', u);	
+});
+
+function updateDB(CatName, CatClickCount) {
+	console.log(CatName);
+	console.log(CatClickCount);
+	for ( d in data ) {
+		if ( data[d].name == CatName) {
+			data[d].count++;
+			return;
+		}
+	}
+}
+
+// listen for click on catpic view area and, update clicks both on view and database
+var catViewArea = $('.catPicAndCountContainer');
+catViewArea.on('click', function(){ 
+	if( $(this).find('.cat_images').attr('src') != "") {
+
+		var clickVal = catViewArea.find('.catClick_count').html();
+
+		if ( clickVal == "" ) {
+			clickVal = 0;
+		}
+		else {
+			clickVal = parseInt(clickVal);
+		}
+		clickVal++;
+		catViewArea.find('.catClick_count').html(clickVal);
+		var catName = catViewArea.find('.cat_name').html();
+		updateDB(catName, clickVal);
+
+	}
 });

@@ -12,4 +12,4 @@
 .catNamesListContainer li {font-family: verdana;list-style-type: none;cursor: pointer; padding: 6px 0 6px 20px; }
 .catNamesListContainer li:hover {background-color: yellow}
 .catPicAndCountContainer {width: 500px;background-color: lightblue; padding: 5px}
-h1 {height: 37px;}
+.cat_name {font-family: verdana; font-style: italic; padding: 4px;}
